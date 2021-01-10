@@ -1,25 +1,32 @@
 <template>
-  <img alt="Vue logo" src="./assets/logo.png">
-  <HelloWorld msg="Welcome to Your Vue.js App"/>
+  <real-digital-form action="/script.php" method="POST">
+    <real-digital-textfield name="name" validation="[a-z]+" />
+    <real-digital-textfield name="phone" validation="[0-9]+" />
+    <real-digital-textfield name="subject" />
+    <real-digital-button>Send</real-digital-button>
+  </real-digital-form>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import RealDigitalButton from "./components/RealDigitalButton.vue";
+import RealDigitalForm from "./components/RealDigitalForm.vue";
+import RealDigitalTextfield from "./components/RealDigitalTextfield";
 
 export default {
-  name: 'App',
+  name: "App",
   components: {
-    HelloWorld
-  }
-}
+    RealDigitalForm,
+    RealDigitalTextfield,
+    RealDigitalButton,
+  },
+};
 </script>
 
 <style>
 #app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
+  font-family: Roboto;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  text-align: center;
   color: #2c3e50;
   margin-top: 60px;
 }
