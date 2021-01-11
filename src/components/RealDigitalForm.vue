@@ -27,7 +27,7 @@ export default {
     },
   },
   methods: {
-    submitForm() {
+    async submitForm() {
       const canSubmit = Object.values(this.form).every(
         (field) => field.hasError === false
       );
@@ -36,12 +36,18 @@ export default {
           acc[key] = val.value;
           return acc;
         }, {});
+
         try {
-          axios({
+          const res = await axios({
             method: this.method,
             url: this.action,
             data: reqForm,
+            headers: {
+              "content-type": "application/json",
+            },
           });
+          console.log(res);
+          // res.data.onResponse();
         } catch (err) {
           console.log("there was an error sending the data", err);
         }

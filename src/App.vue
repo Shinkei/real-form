@@ -1,5 +1,5 @@
 <template>
-  <real-digital-form action="/script.php" method="POST">
+  <real-digital-form action="http://localhost/post" method="POST">
     <template #="{ store }">
       <real-digital-textfield name="name" validation="[a-z]+" @store="store" />
       <real-digital-textfield name="phone" validation="[0-9]+" @store="store" />
