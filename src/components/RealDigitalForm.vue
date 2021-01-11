@@ -1,17 +1,13 @@
 <template>
   <div>
-    <form
-      @submit.prevent="submitForm"
-      class="form"
-      :action="action"
-      :method="method"
-    >
-      <slot @updateForm="upadteForm"></slot>
+    <form @submit.prevent="submitForm" class="form">
+      <slot :store="store"></slot>
     </form>
   </div>
 </template>
 
 <script>
+import axios from "axios";
 export default {
   name: "realDigitalForm",
   data() {
@@ -23,6 +19,7 @@ export default {
     action: {
       type: String,
       required: true,
+      default: "/",
     },
     method: {
       type: String,
@@ -30,11 +27,28 @@ export default {
     },
   },
   methods: {
-    submitForm(e) {
-      console.log(e);
+    submitForm() {
+      const canSubmit = Object.values(this.form).every(
+        (field) => field.hasError === false
+      );
+      if (canSubmit) {
+        const reqForm = Object.entries(this.form).reduce((acc, [key, val]) => {
+          acc[key] = val.value;
+          return acc;
+        }, {});
+        try {
+          axios({
+            method: this.method,
+            url: this.action,
+            data: reqForm,
+          });
+        } catch (err) {
+          console.log("there was an error sending the data", err);
+        }
+      }
     },
-    updateForm() {
-      console.log("upadteForm");
+    store(name, value) {
+      this.form[name] = value;
     },
   },
 };

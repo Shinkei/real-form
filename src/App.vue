@@ -1,9 +1,11 @@
 <template>
   <real-digital-form action="/script.php" method="POST">
-    <real-digital-textfield name="name" validation="[a-z]+" />
-    <real-digital-textfield name="phone" validation="[0-9]+" />
-    <real-digital-textfield name="subject" />
-    <real-digital-button>Send</real-digital-button>
+    <template #="{ store }">
+      <real-digital-textfield name="name" validation="[a-z]+" @store="store" />
+      <real-digital-textfield name="phone" validation="[0-9]+" @store="store" />
+      <real-digital-textfield name="subject" @store="store" />
+      <real-digital-button>Send</real-digital-button>
+    </template>
   </real-digital-form>
 </template>
 

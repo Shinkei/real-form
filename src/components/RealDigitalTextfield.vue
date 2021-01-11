@@ -31,6 +31,10 @@ export default {
         hasError = !reg.test(this.value);
       }
       this.hasError = hasError;
+      this.$emit("store", this.name, {
+        value: this.value,
+        hasError: this.hasError,
+      });
     },
   },
 };
