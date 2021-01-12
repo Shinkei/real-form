@@ -27,6 +27,12 @@ export default {
     },
   },
   methods: {
+    /**
+     * submit the form to the specified server and method, doind a second validation
+     * to verify that the input fields has valid data, it uses axios to do the reques.
+     * after the request, emit the onResponse event with the response from the server and
+     * a string status
+     */
     async submitForm() {
       const canSubmit = Object.values(this.form).every(
         (field) => field.hasError === false
@@ -46,13 +52,17 @@ export default {
               "content-type": "application/json",
             },
           });
-          console.log(res);
-          // res.data.onResponse();
+          this.$emit("onResponse", res.data, "success");
         } catch (err) {
-          console.log("there was an error sending the data", err);
+          const message = `there was an error sending the data/n${err}`;
+          this.$emit("onResponse", message, "fail");
         }
       }
     },
+    /**
+     * listen to the changes in the children inputs and start creating
+     * an object with all the information from the input, value and hasErros
+     */
     store(name, value) {
       this.form[name] = value;
     },

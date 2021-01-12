@@ -24,6 +24,11 @@ export default {
     },
   },
   watch: {
+    /**
+     * Watch the changes of value and apply the regular expression if exists,
+     * also emit the change to the parent for, so it can collect and send the
+     * form to the server
+     */
     value() {
       let hasError = false;
       if (this.validation) {
@@ -49,6 +54,7 @@ export default {
   width: 100%;
 }
 .input {
+  font-family: "Roboto";
   width: 95%;
   border: 1px solid #ccc;
   background: #fff;

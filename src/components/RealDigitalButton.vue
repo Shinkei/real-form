@@ -16,6 +16,7 @@ export default {
 
 <style scoped>
 .button {
+  font-family: "Roboto";
   cursor: pointer;
   width: 100%;
   border: none;
